@@ -2,14 +2,30 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
+const containerVariants = {
+    hidden: {
+        x: '100vw',
+        opacity: 0
+    },
+    visible: {
+        opacity:1,
+        x:0,
+        transition:{
+            type:"spring",
+            delay: 0.5
+        }
+    }
+}
+
 const Base = ({ addBase, pizza }) =>{
     const bases = ['Classic', 'Thin & Crispy', 'Thick Crust', 'Cheese Burst Crust' ];
 
     return(
         <motion.div className = "base container"
-            initial= {{x: '100vw'}}
-            animate= {{x: 0}}
-            transition = {{type:"spring", delay: 0.5}}
+            variants={containerVariants}
+            initial= "hidden"
+            animate= "visible"
+            // transition = {{type:"spring", delay: 0.5}}
         >
             <h3>
                 Step 1: Choose Your Base
