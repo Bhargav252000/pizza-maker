@@ -13,12 +13,32 @@ const buttonVariants = {
         boxShadow:"0px 0px 8px rgb(255,255,255)",
     }
 }
+
+const containerVariants = {
+    hidden:{
+        opacity: 0
+    },
+    visible:{
+        opacity:1,
+        transition:{
+            delay:1.5,
+            duration:1.5
+        }
+    },
+    exit:{
+        x: '-100vh',
+        transition:{
+            ease: 'easeInOut'
+        }
+    }
+}
 const Home = () => {
     return (
         <motion.div className = "home container"
-            initial= {{opacity:0}}
-            animate= {{ opacity: 1}}
-            transition={{delay:1.5, duration:1.5}}
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
         >
             <motion.h2>
                 Welcome To Pizza Joint !
