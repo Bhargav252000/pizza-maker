@@ -1,5 +1,5 @@
-import React from 'react'
-import { motion } from 'framer-motion'
+import React, { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 
 const containerVariants = {
     hidden: {
@@ -29,13 +29,26 @@ const childrenVariants = {
 
 
 const Order = ({ pizza }) => {
+    const [show,setShow] = useState(true);
+
+    setTimeout(() => {
+        setShow(false);
+    },4000)
     return(
         <motion.div className="container order"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
         >
-            <h2> Thank You For Your Order </h2>
+            {/* whwnevr we use AnimatePresence We have to exit out from the component */}
+            {/* we are here removing the title Thank You after 4 secs so we are removing the h2 to y=-1000 */}
+            <AnimatePresence> 
+                {show && (
+                    <motion.h2
+                        exit={{ y: -1000 }}
+                    > Thank You For Your Order </motion.h2>
+                )}
+            </AnimatePresence>
             <motion.p 
                 variants={childrenVariants}
             > You Ordered a {pizza.base} pizza with: </motion.p>
