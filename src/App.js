@@ -4,11 +4,14 @@ import Header from './components/Header'
 import Home from "./components/Home"
 import Base from "./components/Base";
 import Toppings from './components/Toppings'
+import Modal from './components/Modal'
 import Order from './components/Order'
 import { motion } from 'framer-motion'
 import {AnimatePresence} from 'framer-motion'
 
 const App = () => {
+
+    const [showModal,setShowModal] = useState(false);
     const location = useLocation(); // useLocation gives us the exact loction of the Route whenver Changed 
 
     const [pizza, setPizza] = useState({base:"",toppings:[]});
@@ -31,7 +34,8 @@ const App = () => {
     return (
         <>
           <Header />
-          <AnimatePresence exitBeforeEnter>
+          <Modal showModal={showModal} setShowModal={setShowModal}/>
+          <AnimatePresence exitBeforeEnter onExitComplete={() => setShowModal(false)}>
 
             <Switch location= {location} key = {location.key}>
               <Route path="/base">
@@ -41,7 +45,7 @@ const App = () => {
                 <Toppings addTopping={addTopping} pizza={pizza} />
               </Route>
               <Route path="/order">
-                <Order pizza={pizza} />
+                <Order pizza={pizza} setShowModal={setShowModal}/>
               </Route>
               <Route path="/">
                 <Home />
