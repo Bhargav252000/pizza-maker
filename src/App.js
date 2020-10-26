@@ -6,8 +6,6 @@ import Base from "./components/Base";
 import Toppings from './components/Toppings'
 import Modal from './components/Modal'
 import Order from './components/Order'
-import Loader from './components/Loader'
-import { motion } from 'framer-motion'
 import {AnimatePresence} from 'framer-motion'
 
 const App = () => {
